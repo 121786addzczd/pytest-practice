@@ -1,0 +1,28 @@
+version: 1
+formatters:
+  simple:
+    format: '%(asctime)s %(levelname)s.%(name)s: %(message)s'
+    datefmt: '[%Y-%m-%d %H:%M:%S]'
+
+handlers:
+  console:
+    class: logging.StreamHandler
+    formatter: simple
+    level: INFO
+  file:
+    class: logging.handlers.RotatingFileHandler
+    formatter: simple
+    level: INFO
+    filename: logs/exec_test.log
+    maxBytes: 10485760  # 10MB
+    backupCount: 3    # ログファイルを3つまで保持
+
+loggers:
+  __main__:
+    level: INFO
+    handlers: [console, file]
+    propagate: no
+
+root:
+  level: INFO
+  handlers: [console, file]
